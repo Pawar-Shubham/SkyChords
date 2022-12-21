@@ -1,2 +1,3 @@
 # SkyChords
-A simple application which designs melodic ideas!
+A simple application which designs unique chord progressions constantly.
+
