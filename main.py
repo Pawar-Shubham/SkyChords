@@ -58,8 +58,10 @@ def pm():
         passw = fetch_password(result)
         l = login.credentials()
         status,uid = l.log(username,passw)
+        # status = l.log(username,passw)
+        print(status)
         msg = {
-            'uid' : uid[0],
+            'uid' : uid,
             'status' : status,
         }
         msg = json.dumps(msg)
@@ -157,10 +159,8 @@ def delete_acc():
 @app.route('/delete_fav',methods =['POST'])
 def dlt_fav():
     if request.method == "POST":
-        print("Api received")
         result =request.data
         wav_name = fetch_msg(result,'wav_name')
-        print(wav_name)
         wav_name = str(wav_name)
         l = login.credentials()
         status = l.delete_fav(wav_name)
@@ -186,7 +186,6 @@ def edit_fav():
 @app.route('/axios',methods =['POST'])
 def getuid():
     if request.method == "POST":
-        print("hehe")
         result = request.data
         username = fetch_username(result)
         msg = create_msg(username)
@@ -200,10 +199,9 @@ def get_progression():
         arp = fetch_msg(result,'arp')
         key = fetch_msg(result,'key')
         uid = fetch_msg(result,'uid')
-        print("data fetched = ",scale,arp,key,uid)
         n = note.scale_generator()
         progression,chords,wfn,mfn = n.create_progression(key,scale,arp,uid)
-        print(progression)
+        print("p",progression)
         msg ={
             "prog": progression,
             "chords": chords,

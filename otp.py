@@ -6,7 +6,7 @@ import threading
 import random
 import pickle
 
-# from cairo import OPERATOR_ATOP
+from cairo import OPERATOR_ATOP
 from numpy import empty, empty_like, printoptions
 
 class otp_handler:

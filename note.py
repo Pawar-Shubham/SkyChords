@@ -1,8 +1,8 @@
 #!/home/itachi/miniconda3/bin/python3.9
 from cgi import print_directory
-from curses import tparm
 import threading
-from midi import Midi_Creator
+import midi
+# from midi import Midi_Creator
 import handler
 import wav_Creation
 import random
@@ -10,7 +10,7 @@ import numpy as np
 import scipy.io.wavfile as wf
 import simpleaudio as sa
 import random
-from midi import *
+# from midi import *
 from wav_Creation import *
 
 
@@ -222,16 +222,16 @@ class scale_generator:
         global type_of_chord
         type_of_chord = []
         progression = self.player(note,scale)
-        # c = handler.Chord_Generator()
-        # c.create_melody(progression,arp)
-        prog = self.rectify_progression(progression)
+        progression = self.rectify_progression(progression)
+        print(progression)
+        c = handler.chord_Generator()
+        arp,chordsbyte,arpbyte,wfn,mfn = c.create_Melody(progression,uid)
         chord = type_of_chord
         c = wav_Creation()
-        # file_name = c.create_wav(prog,arp,uid)
-        m = midi.Midi_Creator()
-        midi_fn = m.create_midi(prog,arp,file_name)
-        file_name = file_name + ".wav"
-        return(prog,chord,file_name,midi_fn)
+        file_name = c.create_Wav(chordsbyte,arpbyte,wfn)
+        m = midi.midi_Creator()
+        midi_fn = m.creator(progression,arp,mfn)
+        return(progression,chord,wfn,mfn)
         
         
     def rectify_progression(self,progression):
