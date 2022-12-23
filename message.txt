@@ -1,0 +1,73 @@
+#!/home/palak/miniconda3/bin/python3
+import json
+import mysql.connector #as connector
+
+#connecting to the database
+connectiondb = mysql.connector.connect(host="localhost",user="root",passwd="root",database="LoginDB")
+cursordb = connectiondb.cursor()
+    
+cursordb.execute("SELECT * FROM Login_Table")
+for tb in cursordb:
+    print("debugging")
+    print(tb)
+
+def welcome():
+    print("Let's make some dope chords! Lesssssssssssgooooooooooooo!")
+
+def log(Username,User_Password):
+    cursordb.execute("SELECT * FROM Login_Table WHERE Email_id=Username;")
+    for tb in cursordb:
+        print(tb)
+        
+def home(option=None):
+    option=input("Login")
+    if option=="Login":
+        Username = input("Enter your username:")
+        User_Password = input("Enter your Password:")
+        log(Username,User_Password)
+    elif option == "Signup":
+        register()
+    else:
+        print("Please enter a valid parameter, this is case-sensitive")
+
+home()
+
+
+
+
+# def register(Username=None, Password1=None, Password2=None):
+#     Username = input("Enter a username:")
+#     Password1 = input("Create password:")
+#     Password2 = input("Confirm Password:")
+    
+    
+#     if not len(Password1)<=8:
+#         db = open("Login_Table", "r")
+
+#         if not Username ==None:
+#             if len(Username) <1:
+#                 print("Please provide a username")
+#                 register()
+#             elif Username in d:
+#                 print("Username exists")
+#                 register()
+
+                    
+#             else:
+                    
+#                 if Password1 == Password2:
+#                     db = mysql("Login_Table", "a")
+#                     db.write(Username+", "+Password1+"\n")
+#                     print("User created successfully!")
+#                     print("Please login to proceed:")
+
+                    
+                    
+
+                            
+#                 else:
+#                     print("Passwords do not match")
+#                     register()
+
+#     else:
+#         print("Password too short")
